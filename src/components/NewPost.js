@@ -1,10 +1,15 @@
 import classes from './NewPost.module.css'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const NewPost = () => {
+
+    const[enteredBody, setEnteredBody ] = useState("")
+    
     const changeTextHandler = (event)=>{
-        console.log(event.target.value)
+        setEnteredBody(event.target.value); 
     }
+
+   
   return (
     <form className={classes.form}>
         <p>
