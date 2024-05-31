@@ -2,9 +2,11 @@ import PostList from "./components/PostList";
 
 
 function App() {
-  return <main>
+  return (
+  <main>
     <PostList />
   </main>
+  )
 }
 
 export default App;
