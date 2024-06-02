@@ -5,40 +5,44 @@ import NewPost from "./NewPost";
 import Modal from "./Modal";
 
 const PostList = ({isPosting, onStopPosting}) => {
-  const [enteredBody, setEnteredBody] = useState("Hello, world!");
-  const [enteredAuthor, setEnteredAuthor] = useState("Max");
-  const [modalIsVisible, setModalIsVisible] = useState(true);
+ 
+  const [posts, setPosts] = useState([])
   
-  const bodyChangeHandler = (event) => {
-    setEnteredBody(event.target.value);
-  };
-
-  const authorChangeHandler = (event) => {
-    setEnteredAuthor(event.target.value);
-  };
+  const newPostHandler = (name, body)=>{
+    console.log(posts)
+    setPosts(oldPosts => [
+      ...oldPosts,
+      {
+        author:name,
+        content:body
+      },
+    ])
+    console.log(posts)
+  } 
 
   return (
     <>
       {isPosting &&
         <Modal onClose = {onStopPosting}>
-          <NewPost  
-            onBodyChange={bodyChangeHandler}
-            onAuthorChange={authorChangeHandler}
+          <NewPost
+            onAddPost={newPostHandler}
+            onCancel={onStopPosting}
           />
         </Modal>
       }
-    
+    {
+      posts.length !==0 &&
       <ul className={classes.posts}>
-        <li>
-          <Post name={enteredAuthor} content={enteredBody} />
-        </li>
-        <li>
-          <Post name="Ali" content="Checkout the full course" />
-        </li>
-        <li>
-          <Post name="Ali" content="Checkout the full course" />
-        </li>
-      </ul>
+        {posts.map(post => 
+          <li>
+            <Post
+              name={post.author}
+              content= {post.content}
+            />
+          </li>
+        )}
+      </ul> 
+    }
     </>
   );
 };
