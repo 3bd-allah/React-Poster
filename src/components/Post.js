@@ -1,11 +1,19 @@
 import React from "react";
 import classes from "./Post.module.css";
 
-const Post = (props) => {
+const Post = ({name, content, onDelete, id}) => {
+
+  const deleteHandler = ()=>{
+    onDelete(id);
+  }
+
   return (
     <div className={classes.post}>
-      <p className={classes.author}> {props.name} </p>
-      <p className={classes.text}> {props.content} </p>
+      <p className={classes.author}> {name} </p>
+      <p className={classes.text}> {content} </p>
+      <p className={classes.actions}>
+        <button   onClick={deleteHandler}>Delete</button>
+      </p>
     </div>
   );
 };

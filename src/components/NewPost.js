@@ -15,8 +15,8 @@ const NewPost = ({onCancel, onAddPost}) => {
     };
     function submitHandler(e){
         e.preventDefault();
-        setEnteredBody(e.target[0].value)
-        setEnteredAuthor(e.target[1].value)
+        // setEnteredBody(e.target[0].value)
+        // setEnteredAuthor(e.target[1].value)
         console.log(`Author:${enteredAuthor}`)
         console.log(`Body: ${enteredBody}`)
         onAddPost(enteredAuthor, enteredBody);

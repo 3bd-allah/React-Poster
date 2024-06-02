@@ -13,12 +13,18 @@ const PostList = ({isPosting, onStopPosting}) => {
     setPosts(oldPosts => [
       ...oldPosts,
       {
+        id:Date.now(),
         author:name,
         content:body
       },
     ])
     console.log(posts)
   } 
+
+  const deletePostHandler = (id)=>{
+    const newPosts = posts.filter(post => post.id !== id)
+    setPosts(newPosts)
+  }
 
   return (
     <>
@@ -34,8 +40,10 @@ const PostList = ({isPosting, onStopPosting}) => {
       posts.length !==0 &&
       <ul className={classes.posts}>
         {posts.map(post => 
-          <li>
+          <li key={post.id} >
             <Post
+              id={post.id}
+              onDelete={deletePostHandler}
               name={post.author}
               content= {post.content}
             />
