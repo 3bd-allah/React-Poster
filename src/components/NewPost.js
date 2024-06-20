@@ -3,8 +3,8 @@ import React, {useState} from 'react'
 
 const NewPost = ({onCancel, onAddPost}) => {
    
-    const [enteredBody, setEnteredBody] = useState("Hello, world!");
-    const [enteredAuthor, setEnteredAuthor] = useState("Max");
+    const [enteredBody, setEnteredBody] = useState();
+    const [enteredAuthor, setEnteredAuthor] = useState();
 
     const bodyChangeHandler = (event) => {
         setEnteredBody(event.target.value);
