@@ -3,11 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import NewPost from './components/NewPost';
+import RootLayout from './routes/RootLayout';
+
+const routes = createBrowserRouter([
+  {path:'/',
+    element: <RootLayout />,
+    errorElement:<div style={{textAlign:"center",margin:"auto"}}> <h1>Error happened! </h1>  <p>this page is not found </p> </div>,
+    children: [
+      { path:'/', element: <App />},
+      {path:'/create-post' ,element: <NewPost />}
+    ]
+    
+  },
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={routes} />
   </React.StrictMode>
 );
 
