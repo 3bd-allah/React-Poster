@@ -1,25 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import NewPost from './components/NewPost';
-import RootLayout from './routes/RootLayout';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import Posts from "./routes/Posts";
+import reportWebVitals from "./reportWebVitals";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import NewPost from "./routes/NewPost";
+import RootLayout from "./routes/RootLayout";
 
 const routes = createBrowserRouter([
-  {path:'/',
+  {
+    path: "/",
     element: <RootLayout />,
-    errorElement:<div style={{textAlign:"center",margin:"auto"}}> <h1>Error happened! </h1>  <p>this page is not found </p> </div>,
+    errorElement: (
+      <div style={{ textAlign: "center", margin: "auto" }}>
+        {" "}
+        <h1>Error happened! </h1> <p>this page is not found </p>{" "}
+      </div>
+    ),
     children: [
-      { path:'/', element: <App />},
-      {path:'/create-post' ,element: <NewPost />}
-    ]
-    
+      { path: "/", element: <Posts />, children:[
+        { path: "/create-post", element: <NewPost /> },
+      ] },
+    ],
   },
-])
+]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={routes} />
