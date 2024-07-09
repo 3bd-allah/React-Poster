@@ -3,22 +3,26 @@ import Post from "./Post";
 import classes from "./PostList.module.css";
 import NewPost from "../routes/NewPost";
 import Modal from "./Modal";
+import { useLoaderData } from "react-router-dom";
 
 const PostList = () => {
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    async function fetchPosts() {
-      const response = await fetch("http://localhost:8080/posts");
-      const resData = await response.json();
-      setPosts(resData.posts);
-    }
-    fetchPosts();
 
-    // ----------------- old way -------------------
-    // fetch("http://localhost:8080/posts")
-    // .then(response => response.json())
-    // .then(data => setPosts(data.posts))
-  }, []);
+  const postsData = useLoaderData(); 
+  const [posts, setPosts] = useState([])
+  
+  // useEffect(() => {
+  //   async function fetchPosts() {
+  //     const response = await fetch("http://localhost:8080/posts");
+  //     const resData = await response.json();
+  //     setPosts(resData.posts);
+  //   }
+  //   fetchPosts();
+
+  //   // ----------------- old way -------------------
+  //   // fetch("http://localhost:8080/posts")
+  //   // .then(response => response.json())
+  //   // .then(data => setPosts(data.posts))
+  // }, []);
 
   const newPostHandler = (name, body) => {
     console.log(posts);
@@ -46,9 +50,9 @@ const PostList = () => {
 
   return (
     <>
-      {posts.length !== 0 ? (
+      {postsData.length !== 0 ? (
         <ul className={classes.posts}>
-          {posts.map((post) => (
+          {postsData.map((post) => (
             <li>
               <Post
                 key={post.id}

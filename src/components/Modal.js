@@ -5,7 +5,7 @@ const Modal = ({ children }) => {
   
   const navigate = useNavigate();
   function closeHandler(){
-    navigate('..')
+    navigate(-1)
   }
 
   
